@@ -1,38 +1,39 @@
-"use client";
-
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { BlogPostsPreview } from "@/components/blog-posts-preview";
+import { HeroAnimations } from "@/components/hero-animations";
 
 const projects = [
   {
     title: "Acadeva",
     description:
-      "A scheduling platform that turns messy student timetables into a single, shareable flow.",
+      "A student workspace that combines study materials, scheduling, and collaboration into one connected system.",
     problem:
-      "Students lost time comparing schedules across chats and screenshots.",
-    role: "Software engineering",
+      "Students relied on scattered tools like chats, PDFs, and timetables that didn’t work together.",
+    role: "Full-stack development and product design",
     tech: ["Next.js", "Mobile", "Node.js"],
-    result: "Reduced scheduling time from hours to minutes for pilot groups.",
+    result:
+      "Reduced fragmentation by unifying study resources and scheduling into a single workflow.",
   },
   {
     title: "UNIUYO SUG Website",
     description:
-      "A live operations dashboard for triage, staff availability, and patient queues.",
+      "A centralized platform for student union updates, announcements, and communication across the University of Uyo.",
     problem:
-      "Clinic leads lacked a single source of truth during high traffic days.",
-    role: "UX, data modeling, UI build",
+      "Students had no single reliable source for timely and consistent union information.",
+    role: "Frontend development and UI design",
     tech: ["React", "Chakra UI"],
-    result: "Enabled faster handoffs and real-time staffing decisions.",
+    result:
+      "Improved access to updates and created a more consistent and accessible digital presence for the SUG.",
   },
   {
     title: "Rhubarb GUI",
     description:
-      "An internal design system focused on consistency and speed for small teams.",
-    problem: "Design decisions drifted across projects and slowed delivery.",
-    role: "Design systems lead",
+      "A desktop GUI for Rhubarb Lip Sync that simplifies generating lip sync data from audio files.",
+    problem:
+      "Rhubarb Lip Sync is CLI-based, making it harder to use, configure, and monitor for non-technical users.",
+    role: "Desktop application development and UX design",
     tech: ["Python", "PyQt5", "GUI"],
-    result: "Cut UI build time by 35 percent across two teams.",
+    result:
+      "Made lip sync processing more accessible with command preview, progress tracking, and flexible export options.",
   },
 ];
 
@@ -56,42 +57,48 @@ const achievements = [
     time: "2025 • 1st runner up",
     summary:
       "Pitched Acadeva, a comprehensive platform where uni students can find sstudy materials.",
+    image: "/images/emmanuel-and-joe-deveast-2025.jpg",
   },
   {
     title: "Avalanche Team1 BUIDLCAMP",
     time: "2025 • 1st runner up",
     summary:
       "Built AvaBid, an NFT bidding platform that allows users to place bids on NFTs.",
+    image: "/images/emmanuel-surge-aces-week-2025.jpg",
   },
   {
     title: "GDGoC UNIUYO Tech Ignite",
     time: "2024 • 1st & 2nd Place",
     summary:
       "Built 2 AI study tools: An Quiz generator from PDFs and an interactive AI study platform.",
+    image: "/images/emmanuel-and-joe-techignite-2024.jpg",
   },
 ];
 
 const experience = [
   {
     title: "IT Support Personnel",
-    time: "2026",
+    time: "2026 - Present",
     company: "ECEWS",
+    logo: "/images/ecews-logo.jfif",
     summary:
-      "Ship end-to-end products for education and health startups, from discovery to launch.",
+      "Maintained IT infrastructure for a Nigerian NGO delivering healthcare, education, and economic empowerment programs.",
   },
   {
     title: "Dev Co Lead",
     time: "2025 - Present",
     company: "GDGoC UNIUYO",
+    logo: "/images/gdgoc-logo.png",
     summary:
-      "Led two zero-to-one MVPs focused on student productivity and community tools.",
+      "Co-led a Google-backed student developer community, organizing tech workshops and events at UNIUYO.",
   },
   {
     title: "Software Developer",
     time: "2024 - Present",
     company: "Acadeva Limited",
+    logo: "/images/acadeva-logo.png",
     summary:
-      "Design and docs contributions for tools used by early-stage teams.",
+      "Developed features for an AI-powered academic platform serving Nigerian students with study tools.",
   },
 ];
 
@@ -101,27 +108,12 @@ const certifications = [
     summary: "IBM SkillsBuild",
   },
   {
-    title: "Start-up Team Member",
-    summary: "Hult Prize",
+    title: "AI Fundamentals",
+    summary: "IBM SkillsBuild",
   },
   {
     title: "IGCSE",
     summary: "Cambridge Assessment International Education",
-  },
-];
-
-const thoughts = [
-  {
-    title: "Why speed matters more than polish",
-    summary: "A framework for shipping fast without losing craft.",
-  },
-  {
-    title: "Designing for real constraints",
-    summary: "Notes on building for mobile-first audiences in Africa.",
-  },
-  {
-    title: "AI tools that actually stick",
-    summary: "What makes an automation product feel trustworthy.",
   },
 ];
 
@@ -149,48 +141,8 @@ const contacts = [
 ];
 
 export default function Home() {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-line", {
-        y: 24,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
-
-      gsap.from(".hero-chip", {
-        opacity: 0,
-        y: 12,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power2.out",
-        delay: 0.4,
-      });
-
-      gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
-        gsap.from(element, {
-          opacity: 0,
-          y: 36,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            once: true,
-          },
-        });
-      });
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={rootRef} className="min-h-screen">
+    <HeroAnimations>
       <main className="mx-auto w-full max-w-6xl px-6">
         <section className="pb-16 pt-16 md:pt-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
@@ -207,23 +159,7 @@ export default function Home() {
               </h1>
               <p className="hero-line text-lg text-[var(--muted)]">
                 Creating focused tools with sharp UX and reliable systems.
-                <span className="mt-2 block">
-                  University by day, product builder by night.
-                </span>
               </p>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a
-                className="hero-chip rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
-                href="#contact"
-              >
-                Hire Me
-              </a>
-              <span className="hero-chip inline-flex items-center gap-2 rounded-full bg-[var(--accent-strong)]/15 px-6 py-3 text-sm font-semibold text-[var(--accent)]">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
-                Available for new projects
-              </span>
             </div>
           </div>
         </section>
@@ -233,7 +169,7 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
               About
             </p>
-            <h2 className="mt-4 font-display text-3xl text-[var(--ink)]">
+            <h2 className="mt-4 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
               Focused on products with real stakes.
             </h2>
           </div>
@@ -255,16 +191,18 @@ export default function Home() {
           id="projects"
           className="reveal border-t border-[var(--line)] py-16"
         >
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Projects
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
-                The work that makes the case.
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
+                Where ideas turn into shipped results.
               </h2>
             </div>
-            <span className="text-sm text-[var(--muted)]">/ 03</span>
+            <span className="hidden text-sm text-[var(--muted)] md:block">
+              / 01
+            </span>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {projects.map((project) => (
@@ -280,17 +218,23 @@ export default function Home() {
                     {project.description}
                   </p>
                 </div>
-                <div className="space-y-3 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                <div className="space-y-3 text-sm text-[var(--muted)]">
                   <p>
-                    <span className="text-[var(--ink)] font-bold">Problem</span>{" "}
+                    <span className="text-[var(--ink)] font-semibold">
+                      Problem
+                    </span>{" "}
                     {project.problem}
                   </p>
                   <p>
-                    <span className="text-[var(--ink)] font-bold">Role</span>{" "}
+                    <span className="text-[var(--ink)] font-semibold">
+                      Role
+                    </span>{" "}
                     {project.role}
                   </p>
                   <p>
-                    <span className="text-[var(--ink)] font-bold">Result</span>{" "}
+                    <span className="text-[var(--ink)] font-semibold">
+                      Result
+                    </span>{" "}
                     {project.result}
                   </p>
                 </div>
@@ -318,8 +262,8 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Skills
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
-                Stack I can defend in a room.
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
+                My working stack for building reliable software.
               </h2>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
@@ -351,32 +295,44 @@ export default function Home() {
           id="achievements"
           className="reveal border-t border-[var(--line)] py-16"
         >
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Achievements
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
-                Real work, real shipping.
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
+                Notable wins and measurable impact.
               </h2>
             </div>
-            <span className="text-sm text-[var(--muted)]">/ 06</span>
+            <span className="hidden text-sm text-[var(--muted)] md:block">
+              / 02
+            </span>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {achievements.map((item) => (
               <div
                 key={item.title}
-                className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6"
+                className="relative overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--surface)]"
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                  {item.time}
-                </p>
-                <h3 className="mt-3 font-display text-xl text-[var(--ink)]">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm text-[var(--muted)]">
-                  {item.summary}
-                </p>
+                <div
+                  className="h-48 overflow-hidden"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <div className="border-t border-[var(--line)] p-6">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                    {item.time}
+                  </p>
+                  <h3 className="mt-3 font-display text-xl text-[var(--ink)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[var(--muted)]">
+                    {item.summary}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -386,16 +342,18 @@ export default function Home() {
           id="experience"
           className="reveal border-t border-[var(--line)] py-16"
         >
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Experience
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
                 Real work, real shipping.
               </h2>
             </div>
-            <span className="text-sm text-[var(--muted)]">/ 06</span>
+            <span className="hidden text-sm text-[var(--muted)] md:block">
+              / 03
+            </span>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {experience.map((item) => (
@@ -406,12 +364,21 @@ export default function Home() {
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
                   {item.time}
                 </p>
-                <h3 className="mt-3 font-display text-xl text-[var(--ink)]">
-                  {item.title}
-                </h3>
-                <h3 className="mt-0 font-display text-xl text-xs">
-                  {item.company}
-                </h3>
+                <div className="mt-3 flex items-start gap-3">
+                  <img
+                    src={item.logo}
+                    alt={item.company}
+                    className="h-12 w-12 flex-shrink-0 object-contain"
+                  />
+                  <div className="flex flex-col">
+                    <h3 className="font-display text-xl text-[var(--ink)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-0 text-sm font-semibold text-[var(--ink)]">
+                      {item.company}
+                    </p>
+                  </div>
+                </div>
                 <p className="mt-2 text-sm text-[var(--muted)]">
                   {item.summary}
                 </p>
@@ -421,16 +388,18 @@ export default function Home() {
         </section>
 
         <section className="reveal border-t border-[var(--line)] py-16">
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Certifications
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
-                Writing to show how I think.
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
+                Credentials that back my technical abilities.
               </h2>
             </div>
-            <span className="text-sm text-[var(--muted)]">/ 03</span>
+            <span className="hidden text-sm text-[var(--muted)] md:block">
+              / 04
+            </span>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {certifications.map((post) => (
@@ -449,34 +418,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="reveal border-t border-[var(--line)] py-16">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
-                Thoughts
-              </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
-                Writing to show how I think.
-              </h2>
-            </div>
-            <span className="text-sm text-[var(--muted)]">/ 03</span>
-          </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {thoughts.map((post) => (
-              <div
-                key={post.title}
-                className="rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6"
-              >
-                <h3 className="font-display text-xl text-[var(--ink)]">
-                  {post.title}
-                </h3>
-                <p className="mt-2 text-sm text-[var(--muted)]">
-                  {post.summary}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <BlogPostsPreview />
 
         <section
           id="contact"
@@ -487,7 +429,7 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Contact
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
                 Make it easy to reach me.
               </h2>
               <p className="mt-4 text-sm text-[var(--muted)]">
@@ -499,7 +441,7 @@ export default function Home() {
               {contacts.map((contact) => (
                 <a
                   key={contact.label}
-                  className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-5 py-6 transition hover:border-transparent hover:bg-[var(--ink)] hover:text-white"
+                  className="group rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-5 py-6 transition hover:border-[var(--accent)]"
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -507,7 +449,9 @@ export default function Home() {
                   <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
                     {contact.label}
                   </p>
-                  <p className="mt-2 text-sm font-semibold">{contact.value}</p>
+                  <p className="mt-2 text-sm font-semibold text-[var(--ink)]">
+                    {contact.value}
+                  </p>
                 </a>
               ))}
             </div>
@@ -520,12 +464,12 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--muted)]">
                 Call to Action
               </p>
-              <h2 className="mt-3 font-display text-3xl text-[var(--ink)]">
+              <h2 className="mt-3 font-display text-2xl leading-tight text-[var(--ink)] sm:text-3xl">
                 Lets build something important.
               </h2>
             </div>
             <a
-              className="inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-[var(--ink)]"
+              className="inline-flex whitespace-nowrap rounded-full bg-[var(--accent)] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-md transition hover:bg-[var(--accent-strong)] hover:shadow-lg"
               href="mailto:emmanuel@acadeva.xyz"
             >
               Start a project
@@ -535,8 +479,8 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-[var(--line)] py-10 text-center text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
-        Built for clarity, speed, and trust.
+        © {new Date().getFullYear()} Emmanuel Akpan
       </footer>
-    </div>
+    </HeroAnimations>
   );
 }
