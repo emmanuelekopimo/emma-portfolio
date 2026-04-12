@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   description:
     "Product-minded engineer building focused tools with measurable impact.",
   authors: { name: "Emmanuel Akpan", url: "" },
+  icons: {
+    icon: "/images/Emmanuel.png",
+  },
 };
 
 export default function RootLayout({

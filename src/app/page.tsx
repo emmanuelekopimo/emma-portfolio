@@ -1,5 +1,6 @@
 import { BlogPostsPreview } from "@/components/blog-posts-preview";
 import { HeroAnimations } from "@/components/hero-animations";
+import "remixicon/fonts/remixicon.css";
 
 const projects = [
   {
@@ -12,17 +13,8 @@ const projects = [
     tech: ["Next.js", "Mobile", "Node.js"],
     result:
       "Reduced fragmentation by unifying study resources and scheduling into a single workflow.",
-  },
-  {
-    title: "UNIUYO SUG Website",
-    description:
-      "A centralized platform for student union updates, announcements, and communication across the University of Uyo.",
-    problem:
-      "Students had no single reliable source for timely and consistent union information.",
-    role: "Frontend development and UI design",
-    tech: ["React", "Chakra UI"],
-    result:
-      "Improved access to updates and created a more consistent and accessible digital presence for the SUG.",
+    url: "https://acadeva.xyz",
+    urlType: "web",
   },
   {
     title: "Rhubarb GUI",
@@ -34,6 +26,19 @@ const projects = [
     tech: ["Python", "PyQt5", "GUI"],
     result:
       "Made lip sync processing more accessible with command preview, progress tracking, and flexible export options.",
+    url: "https://github.com/emmanuelekopimo/rhubarb-gui",
+    urlType: "github",
+  },
+  {
+    title: "UNIUYO SUG Website",
+    description:
+      "A centralized platform for student union updates, announcements, and communication across the University of Uyo.",
+    problem:
+      "Students had no single reliable source for timely and consistent union information.",
+    role: "Frontend development and UI design",
+    tech: ["React", "Chakra UI"],
+    result:
+      "Improved access to updates and created a more consistent and accessible digital presence for the SUG.",
   },
 ];
 
@@ -211,9 +216,33 @@ export default function Home() {
                 className="flex h-full flex-col gap-4 rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6"
               >
                 <div>
-                  <h3 className="font-display text-2xl text-[var(--ink)]">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-display text-2xl text-[var(--ink)]">
+                      {project.title}
+                    </h3>
+                    {project.url && project.urlType === "web" && (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
+                        title={project.url}
+                      >
+                        <i className="ri-global-line text-xl"></i>
+                      </a>
+                    )}
+                    {project.url && project.urlType === "github" && (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
+                        title={project.url}
+                      >
+                        <i className="ri-github-fill text-xl"></i>
+                      </a>
+                    )}
+                  </div>
                   <p className="mt-2 text-sm text-[var(--muted)]">
                     {project.description}
                   </p>
