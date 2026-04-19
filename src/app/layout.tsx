@@ -1,3 +1,5 @@
+import { DarkModeToggle } from "@/components/dark-mode-toggle";
+import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -55,11 +57,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <div className="flex justify-end p-6">
+            <DarkModeToggle />
+          </div>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

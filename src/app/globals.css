@@ -11,6 +11,17 @@
   --bg: #f2f4f6;
 }
 
+html.dark {
+  --ink: #f0f6f6;
+  --muted: #a8b4ba;
+  --surface: #0c1116;
+  --surface-alt: #161b21;
+  --line: #30363d;
+  --accent: #2db7a3;
+  --accent-strong: #79d8be;
+  --bg: #0d1117;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -29,6 +40,21 @@ body {
   min-height: 100vh;
 }
 
+html.dark body {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(45, 183, 163, 0.1) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(45, 183, 163, 0.08),
+      transparent 40%
+    ),
+    var(--bg);
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -42,8 +68,22 @@ body::before {
   z-index: -1;
 }
 
+html.dark body::before {
+  background-image:
+    linear-gradient(rgba(240, 246, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 246, 246, 0.05) 1px, transparent 1px);
+}
+
 .font-display {
   font-family: var(--font-display), "Helvetica", "Arial", sans-serif;
+}
+
+.avatar-shadow {
+  box-shadow: 0 20px 40px rgba(12, 17, 22, 0.08);
+}
+
+html.dark .avatar-shadow {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .prose {

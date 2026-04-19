@@ -155,7 +155,7 @@ export default function Home() {
       <main className="mx-auto w-full max-w-6xl px-6">
         <section className="pb-16 pt-16 md:pt-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <div className="mt-10 flex h-20 w-20 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-xl font-semibold text-[var(--ink)] shadow-[0_20px_40px_rgba(12,17,22,0.08)]">
+            <div className="mt-10 flex h-20 w-20 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-xl font-semibold text-[var(--ink)] avatar-shadow">
               E
             </div>
 
