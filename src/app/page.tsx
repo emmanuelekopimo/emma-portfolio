@@ -63,6 +63,7 @@ const achievements = [
     summary:
       "Pitched Acadeva, a comprehensive platform where uni students can find sstudy materials.",
     image: "/images/emmanuel-and-joe-deveast-2025.jpg",
+    url: "https://leadership.ng/varsity-students-pitch-innovations-at-2025-entrepreneurship-week/",
   },
   {
     title: "Avalanche Team1 BUIDLCAMP",
@@ -86,6 +87,7 @@ const experience = [
     time: "2026 - Present",
     company: "ECEWS",
     logo: "/images/ecews-logo.jfif",
+    url: "https://www.linkedin.com/company/ecewsng",
     summary:
       "Maintained IT infrastructure for a Nigerian NGO delivering healthcare, education, and economic empowerment programs.",
   },
@@ -94,6 +96,7 @@ const experience = [
     time: "2025 - Present",
     company: "GDGoC UNIUYO",
     logo: "/images/gdgoc-logo.png",
+    url: "https://www.linkedin.com/company/gdscuniuyo/",
     summary:
       "Co-led a Google-backed student developer community, organizing tech workshops and events at UNIUYO.",
   },
@@ -102,6 +105,7 @@ const experience = [
     time: "2024 - Present",
     company: "Acadeva Limited",
     logo: "/images/acadeva-logo.png",
+    url: "https://www.linkedin.com/company/acadeva",
     summary:
       "Developed features for an AI-powered academic platform serving Nigerian students with study tools.",
   },
@@ -361,6 +365,15 @@ export default function Home() {
                   <p className="mt-2 text-sm text-[var(--muted)]">
                     {item.summary}
                   </p>
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      className="mt-4 inline-block text-sm text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors"
+                    >
+                      Read News
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -403,9 +416,13 @@ export default function Home() {
                     <h3 className="font-display text-xl text-[var(--ink)]">
                       {item.title}
                     </h3>
-                    <p className="mt-0 text-sm font-semibold text-[var(--ink)]">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      className="mt-0 text-sm font-semibold text-[var(--accent)] hover:text-[var(--accent-strong)] transition-colors"
+                    >
                       {item.company}
-                    </p>
+                    </a>
                   </div>
                 </div>
                 <p className="mt-2 text-sm text-[var(--muted)]">

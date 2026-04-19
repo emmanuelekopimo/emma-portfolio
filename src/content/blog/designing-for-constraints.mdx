@@ -1,49 +1,113 @@
 ---
 title: Designing for Real Constraints
-date: 2024-10-12
-summary: Notes on building practical products for mobile-first users, low bandwidth environments, and everyday African realities.
+date: 2026-04-19
+summary: Building products that actually work in mobile-first markets, where bandwidth, power, and device limitations define real user experience.
 ---
 
 # Designing for Real Constraints
 
-Most design advice assumes ideal conditions. Fast networks. Powerful devices. Reliable electricity.
+“Why would the app be 120MB? I’m not downloading.”  
+— Typical Nigerian mobile user
 
-But for billions of people—especially across Africa—these assumptions are false.
+Yet most developers still don’t care.
 
-## The Constraints Are Features
+If you check Twitter or other online forums, you’ll see arguments about which tools give the best developer experience, what operating system is superior, or what setup makes you the most productive. I understand the appeal. A good developer experience can lead to a good user experience. But it doesn’t always translate, especially when real-world constraints are involved.
 
-Building for constraint forces better design. When bandwidth is precious, every byte matters. When device power is limited, efficient code becomes non-negotiable. When the user might lose connectivity mid-task, offline-first features become essential.
+I’ve built and deployed products in those constraints. One of them is Acadeva.
 
-These aren't limitations. They're design requirements that make products better for everyone.
+Seeing tools built for a mobile-dominated market like Nigerian students, yet only working properly on desktops or requiring strong internet and large downloads, makes you wonder if the builders truly understand their users.
 
-## What Changes
+## The Reality We Build For
 
-When you design for constraint:
+Let’s use Africa as a case study.
 
-**Speed becomes critical**
+Africa is a mobile-first market. The vast majority of users rely on smartphones for their day-to-day digital activities, and for many, it’s their only computing device.
 
-- A three-second load is unusable on 3G
-- Caching and progressive enhancement aren't optional
-- Every kilobyte of JavaScript has a cost
+But the infrastructure is not scaling at the same pace.
 
-**Usability improves**
+Every day, new SIM cards are activated and new devices come online, yet network quality often remains inconsistent due to congestion and limited expansion of supporting infrastructure. Electricity is another layer of the problem. Power supply is unreliable in many areas, which means users are constantly managing battery life.
 
-- Simpler interfaces work better on small screens
-- Voice and SMS interfaces become more valuable
-- Feedback loops need to be immediate
+These are not edge cases. This is the environment.
 
-**Battery and data**
+So when you build an app that assumes:
 
-- Users think in data, not free connections
-- Power consumption becomes a design metric
-- Throttling isn't a special case—it's the baseline
+- fast and stable internet
+- constant connectivity
+- large storage space
+- high RAM availability
 
-## The Future Isn't Different
+you’re not building for your market. You’re building for a version of it that doesn’t exist.
 
-The products built for real constraints in Africa will be used globally.
+## Performance Is the Product
 
-Progressive web apps, offline-first databases, lightweight frameworks—these started as African necessities. They became global best practices.
+Apps should be designed to use less processing power, less RAM, less data, and less battery. This is not an optimization phase you leave for later. It is part of the product itself.
 
-The lessons are clear: design for the 70%, not the 30%. Build for the worst case, not the best. Make products that work when conditions are real, not imagined.
+There’s a reason apps like WhatsApp dominate. It’s not just features. It’s efficiency. It works across low-end devices, survives poor networks, and respects user resources.
 
-That's designing with integrity.
+Now compare that to many modern apps that repeatedly fetch the same data, ignore caching, and ship unnecessarily large bundles.
+
+The other day, I noticed that Acadeva was making too many requests to the server immediately after opening. When I checked the code, I found that a piece of AI-generated logic was fetching data that was already available in local storage.
+
+My issue wasn’t that AI was used. The issue was that no one questioned it.
+
+AI will give you working code. It will not automatically give you optimized code for your environment. You still have to think.
+
+## The Gap in Modern Development
+
+A lot of developers today, especially those growing up with AI tools, can build features quickly. But many lack a solid understanding of caching, optimization, and system design.
+
+And because things work fine on high-end devices, they ship.
+
+Meanwhile, the average Android phone in many African markets runs on around 3GB RAM. That difference matters.
+
+This is why I strongly believe that beyond knowing how to code, developers need to understand how systems behave under constraints. Best practices and optimization are not optional skills. They are foundational.
+
+A good developer is not just someone who builds features. It’s someone who can build for constraints, whether real or simulated.
+
+## Building Acadeva with Constraints in Mind
+
+When we set out to build Acadeva, these realities guided every decision.
+
+I constantly thought about every resource going into the final bundle and tracked how requests impacted performance. We treated efficiency as a requirement, not a bonus.
+
+- All assets were compressed as much as possible
+- Data that doesn’t change frequently is stored offline
+- Network requests were reduced and carefully monitored
+
+For local storage:
+
+- On Android: Room (SQLite ORM) or DataStore
+- On iOS: Core Data or NSUserDefaults depending on the use case
+- With Capacitor: IndexedDB, localStorage, or Capacitor Storage and SQLite plugins
+
+For performance testing, Chrome Lighthouse was useful for simulating slower network conditions and identifying bottlenecks early.
+
+The target was always mobile. That decision alone simplifies many trade-offs.
+
+## What Happens If You Ignore This
+
+Picture this.
+
+A user is running out of storage. Their phone starts suggesting apps to delete.
+
+Your app is at the top of that list because of its size.
+
+Or your app quietly drains their data subscription every time it runs in the background.
+
+Or it eats into their battery at a time when they may not have power for hours.
+
+In those moments, your features don’t matter. Your design doesn’t matter.
+
+Your app is gone.
+
+## Final Thoughts
+
+Build for the worst.
+
+Assume poor internet. Assume low battery. Assume limited storage. Assume entry-level devices.
+
+If your app works well there, it will work anywhere.
+
+You may not hit every target perfectly, but you will build something that survives real-world conditions.
+
+And in markets like Africa, survival is what separates products that exist from products that matter.

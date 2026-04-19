@@ -23,9 +23,46 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
+  const postImages: { [key: string]: string } = {
+    "information-overload":
+      "/images/information-overload-and-the%20future-of-learning.png",
+    "future-study-materials":
+      "/images/the-state-of-study-materials-in-nigerian-universities.png",
+    "designing-for-constraints": "/images/designing-for-real-constraints.png",
+  };
+
+  const imageUrl = postImages[slug] || "/images/Emmanuel.png";
+  const postUrl = `https://emma.acadeva.xyz/blog/${slug}`;
+
   return {
     title: post.title,
     description: post.summary,
+    metadataBase: new URL("https://emma.acadeva.xyz"),
+    canonical: postUrl,
+    openGraph: {
+      type: "article",
+      url: postUrl,
+      title: post.title,
+      description: post.summary,
+      publishedTime: post.date,
+      authors: ["Emmanuel Akpan"],
+      siteName: "Emmanuel Akpan",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@emmanuelekopimo",
+      title: post.title,
+      description: post.summary,
+      images: [imageUrl],
+    },
   };
 }
 

@@ -4,6 +4,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import path from "path";
+import React from "react";
 
 export interface BlogPost {
   slug: string;
@@ -15,7 +16,16 @@ export interface BlogPost {
 
 const BLOG_DIRECTORY = path.join(process.cwd(), "src/content/blog");
 
-export async function getAllBlogPosts(): Promise<Omit<BlogPost, 'content'>[]> {
+const mdxComponents = {
+  a: (props: any) =>
+    React.createElement("a", {
+      ...props,
+      target: "_blank",
+      rel: "noopener noreferrer",
+    }),
+};
+
+export async function getAllBlogPosts(): Promise<Omit<BlogPost, "content">[]> {
   const files = fs
     .readdirSync(BLOG_DIRECTORY)
     .filter((file) => file.endsWith(".mdx"));
@@ -51,6 +61,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       options: {
         parseFrontmatter: false,
       },
+      components: mdxComponents,
     });
 
     return {
