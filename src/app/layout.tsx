@@ -1,5 +1,6 @@
 import { DarkModeToggle } from "@/components/dark-mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default function RootLayout({
           </div>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
